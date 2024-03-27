@@ -7,12 +7,12 @@ public class User {
     private String password;
     private String email;
     private String role;
-    private boolean state;
+    private Boolean state;
 
     public User() {
     }
 
-    public User(String username, String password, String email, String role, boolean state) {
+    public User(String username, String password, String email, String role, Boolean state) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -40,7 +40,7 @@ public class User {
         return role;
     }
 
-    public boolean getState() {
+    public Boolean getState() {
         return state;
     }
 
@@ -64,7 +64,7 @@ public class User {
         this.role = role;
     }
 
-    public void setState(boolean state) {
+    public void setState(Boolean state) {
         this.state = state;
     }
 

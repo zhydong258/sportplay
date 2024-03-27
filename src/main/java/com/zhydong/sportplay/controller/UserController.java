@@ -5,7 +5,9 @@ import com.zhydong.sportplay.bean.QueryInfo;
 import com.zhydong.sportplay.bean.User;
 import com.zhydong.sportplay.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -29,5 +31,40 @@ public class UserController {
         res.put("data", users);
         String res_string = JSON.toJSONString(res);
         return res_string;
+    }
+
+    @RequestMapping("/userstate")
+    public String updateUserState(@RequestParam("id")Integer id,
+                                  @RequestParam("state")Boolean state){
+        int i = udao.updateState(id, state);
+        return i > 0 ? "success":"error";
+    }
+
+    @RequestMapping("/adduser")
+    public String addUser(@RequestBody User user) {
+        user.setRole("普通用户");
+        user.setState(false);
+        int i = udao.addUser(user);
+        return i > 0 ? "success":"error";
+    }
+
+    @RequestMapping("/deleteuser")
+    public String deleteUser(int id){
+        int i = udao.deleteUser(id);
+        return i > 0 ? "success":"error";
+    }
+
+    @RequestMapping("/getupdate")
+    public String getUpdateUser(int id) {
+        User user = udao.getUpdateUser(id);
+        String string = JSON.toJSONString(user);
+        return string;
+
+    }
+
+    @RequestMapping("/edituser")
+    public String editUser(@RequestBody User user){
+        int i = udao.editUser(user);
+        return i > 0 ? "success":"error";
     }
 }
